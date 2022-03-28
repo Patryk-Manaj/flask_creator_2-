@@ -1,0 +1,379 @@
+{% extends "public/templates/public_template.html" %}
+
+{% block title %}Kreator deklaracji{% endblock %}
+
+{% block main%}
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <p style="font-size: 46px; text-align: center;">Kreator deklaracji</p>
+            <hr>
+
+            <form action ="/upload-pdf" method = "POST" enctype = "multipart/form-data">
+
+                
+                <div class = "form-group">
+                
+                    <label> Wybierz plik do przetłumaczenia </label>
+
+                    <div class = "custom-file" style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+                        <input oninput="filesize(this);" type = "file" class = "custom-file-input" name = "pdf" id = "pdf" style="width: 1000px;align-items: center;">
+                        <label class = "custom-file-label" for = "pdf" style="width: auto;"> Wybierz plik *.pdf...</label>  
+                    </div>
+                    
+
+                    <br>
+
+                    <div class="first">
+                        <label>Numer deklaracji<input class="form-control" type="text" name="decnum" placeholder="Max. number of characters 30." style="width: 1110px;"></label>
+                        <br>
+                        <label>Opis produktu<textarea class="form-control" type="text" name="prodident" placeholder="Max. number of characters 30." style="width: 1110px;"></textarea></label>
+                        <br>
+                        <label>Producent<input class="form-control" type="text" name="manufac" placeholder="Max. number of characters 30." style="width: 1110px;"></label>
+                        <br>
+                        <label>Adres<input class="form-control" type="text" name="adresss" placeholder="Max. number of characters 30." style="width: 1110px;"></label>
+                    </div>
+                    <br>
+                    <br>
+                    Dyrektywy
+                    <br>
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Numer dyrektywy" name="directive_number_1" id="1" style="width: auto;">
+                        <input type="text" class="form-control input-sm" placeholder="Dyrektywa" name="directive_1" id="2" style="width: 800px;">
+                        <input type="text" class="form-control" placeholder="Numer dyrektywy" name="directive_number_2" id="3" style="width: auto;">
+                        <input type="text" class="form-control input-sm" placeholder="Dyrektywa" name="directive_2" id="4" style="width: 800px;">
+                        <input type="text" class="form-control" placeholder="Numer dyrektywy" name="directive_number_3" id="5" style="width: auto;">
+                        <input type="text" class="form-control input-sm" placeholder="Dyrektywa" name="directive_3" id="6" style="width: 800px;">
+                        <input type="text" class="form-control" placeholder="Numer dyrektywy" name="directive_number_4" id="7" style="width: auto;">
+                        <input type="text" class="form-control input-sm" placeholder="Dyrektywa" name="directive_4" id="8" style="width: 800px;">
+                        <input type="text" class="form-control" placeholder="Numer dyrektywy" name="directive_number_5" id="9" style="width: auto;">
+                        <input type="text" class="form-control input-sm" placeholder="Dyrektywa" name="directive_5" id="10" style="width: 800px;">
+                    </div>
+
+                    <button class="btn btn-primary updateButton" type="button" onclick="delete_data(); window.location.reload();" style="float: right; margin-left: 5px;
+                    margin-top: 10px;">Usuń</button>
+
+                    <button class="btn btn-primary updateButton" type="button" onclick="write_data(); window.location.reload();" style="float: right; margin-top: 10px;">Zapisz</button>
+                    <button class="btn btn-primary updateButton" type="button" onclick="submit_entry();" style="margin-top: 10px;">Wczytaj</button>
+                    
+                    <button class="btn btn-primary updateButton" type="button" 
+                        onclick="document.getElementById('1').value = ''
+                                document.getElementById('2').value = ''
+                                document.getElementById('3').value = ''
+                                document.getElementById('4').value = ''
+                                document.getElementById('5').value = ''
+                                document.getElementById('6').value = ''
+                                document.getElementById('7').value = ''
+                                document.getElementById('8').value = ''
+                                document.getElementById('9').value = ''
+                                document.getElementById('10').value = ''" style="margin-top: 10px;">Wyczyść</button>
+                        
+                </div>
+                
+                <br>
+                <br>
+                
+                <div class="norm-group">
+                    <div class="form-group col-md-4" style="float: left; width: 270px">
+                        <label for="norma_1" class="control-label">Norma</label>
+                        <input type="text" class="form-control" id="norma_1" name="norma_1">
+                    </div>
+                    <div class="form-group col-md-4" style="float: left; width: 270px">
+                        <label for="rok_1" class="control-label">Rok</label>
+                        <input type="text" class="form-control" id="rok_1" name="rok_1"/>
+                    </div>
+                    <div class="form-group col-md-4" style="float: left; width: 270px">
+                        <label for="norma_2" class="control-label">Norma</label>
+                        <input type="text" class="form-control" id="nroma_2" name="norma_2">
+                    </div>
+                    <div class="form-group col-md-4" style="float: left; width: 270px">
+                        <label for="rok_2" class="control-label">Rok</label>
+                        <input type="text" class="form-control" id="rok_2" name="rok_2"/>
+                    </div>
+
+                    <div class="form-group col-md-4" style="width: 270px; float: left;">
+                        <input type="text" class="form-control" id="nroma_3" name="norma_3">
+                    </div>
+                    <div class="form-group col-md-4" style="float: left; width: 270px">
+                        <input type="text" class="form-control" id="rok_3" name="rok_3"/>
+                    </div>
+                    <div class="form-group col-md-4" style="width: 270px; float: left;">
+                        <input type="text" class="form-control" id="nroma_4" name="norma_4">
+                    </div>
+                    <div class="form-group col-md-4" style="float: left; width: 270px">
+                        <input type="text" class="form-control" id="rok_4" name="rok_4"/>
+                    </div>
+                    <div class="form-group col-md-4" style="width: 270px; float: left;">
+                        <input type="text" class="form-control" id="nroma_5" name="norma_5">
+                    </div>
+                    <div class="form-group col-md-4" style="float: left; width: 270px">
+                        <input type="text" class="form-control" id="rok_5" name="rok_5"/>
+                    </div>
+                    <div class="form-group col-md-4" style="width: 270px; float: left;">
+                        <input type="text" class="form-control" id="nroma_6" name="norma_6">
+                    </div>
+                    <div class="form-group col-md-4" style="float: left; width: 270px">
+                        <input type="text" class="form-control" id="rok_6" name="rok_6"/>
+                    </div>
+                    <div class="form-group col-md-4" style="width: 270px; float: left;">
+                        <input type="text" class="form-control" id="nroma_7" name="norma_7">
+                    </div>
+                    <div class="form-group col-md-4" style="float: left; width: 270px">
+                        <input type="text" class="form-control" id="rok_7" name="rok_7"/>
+                    </div>
+                    <div class="form-group col-md-4" style="width: 270px; float: left;">
+                        <input type="text" class="form-control" id="nroma_8" name="norma_8">
+                    </div>
+                    <div class="form-group col-md-4" style="float: left; width: 270px">
+                        <input type="text" class="form-control" id="rok_8" name="rok_8"/>
+                    </div>
+                    <div class="form-group col-md-4" style="width: 270px; float: left;">
+                        <input type="text" class="form-control" id="nroma_9" name="norma_9">
+                    </div>
+                    <div class="form-group col-md-4" style="float: left; width: 270px">
+                        <input type="text" class="form-control" id="rok_9" name="rok_9" />
+                    </div>
+                    <div class="form-group col-md-4" style="width: 270px; float: left;">
+                        <input type="text" class="form-control" id="nroma_10" name="norma_10">
+                    </div>
+                    <div class="form-group col-md-4" style="float: left; width: 270px">
+                        <input type="text" class="form-control" id="rok_10" name="rok_10" />
+                    </div>
+                    
+                    <br/>
+                    <div class="date_and_place">
+                        <div class="form-group" style="float: top; width: 370px">
+                            <label for="date_place" class="control-label">Data i miejsce</label>
+                            <input type="text" class="form-control" id="date_place" name="date_place"/>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            
+                        
+                
+                
+
+                
+
+                
+                <button type = "submit" class = "btn btn-primary"> Upload .pdf</button> 
+
+
+                
+            </form>
+
+            
+
+            <br>
+
+            <br/>
+
+            {% for dyrective in dyrectives %}
+            
+                {{dyrective.name}} - {{dyrective.dyrect}} <br/> 
+
+            {%endfor%}
+            
+            <br>
+            <br>
+
+        </div>
+    </div>
+</div>
+
+{%endblock%}
+
+{% block script %}
+
+<script>
+
+    function filesize(elem){
+        document.cookie = `filesize=${elem.files[0].size}`;
+    }
+
+
+    $('#pdf').on('change',function(){
+                //get the file name
+                var fileName = $(this).val();
+                //replace the "Choose a file" label
+                $(this).next('.custom-file-label').html(fileName);
+            })
+
+    function submit_entry(){
+        
+        var dyr_name_1 = document.getElementById("1");
+        var dyrect_1 = document.getElementById("2");
+        var dyr_name_2 = document.getElementById("3");
+        var dyrect_2 = document.getElementById("4");
+        var dyr_name_3 = document.getElementById("5");
+        var dyrect_3 = document.getElementById("6");
+        var dyr_name_4 = document.getElementById("7");
+        var dyrect_4 = document.getElementById("8");
+        var dyr_name_5 = document.getElementById("9");
+        var dyrect_5 = document.getElementById("10");
+        document.getElementById("2").value = document.getElementById("4").value = 
+        document.getElementById("6").value = document.getElementById("8").value =
+        document.getElementById("10").value = '';
+
+        var entry = {
+            dyr_name_1: dyr_name_1.value,
+            dyrect_1: dyrect_1.value,
+            dyr_name_2: dyr_name_2.value,
+            dyrect_2: dyrect_2.value,
+            dyr_name_3: dyr_name_3.value,
+            dyrect_3: dyrect_3.value,
+            dyr_name_4: dyr_name_4.value,
+            dyrect_4: dyrect_4.value,
+            dyr_name_5: dyr_name_5.value,
+            dyrect_5: dyrect_5.value,
+            flag: "0"
+        };
+
+        console.log(entry);
+
+        fetch(`${window.origin}/upload-pdf`, {
+            method: "POST",
+            credentials: "include",
+            body: JSON.stringify(entry),
+            cache: "no-cache",
+            headers: new Headers({
+                "content-type": "application/json"
+            })
+        })
+        .then(function (response) {
+
+            if (response.status !== 200) {
+                console.log(`Response status was not 200: ${response.status}`)
+                return ;
+            }
+
+            response.json().then(function (data){
+
+                console.log(data)
+
+
+                for (var i = 0; i < data.length; i++){
+
+                    if (document.getElementById("1").value != "" && document.getElementById("2").value == ''){
+                        document.getElementById("2").value = data[i]
+                    }
+
+                    else if (document.getElementById("3").value != "" && document.getElementById("4").value == ''){
+                        document.getElementById("4").value = data[i]
+                    }
+
+                    else if (document.getElementById("5").value != "" && document.getElementById("6").value == ''){
+                        document.getElementById("6").value = data[i]
+                    }
+
+                    else if (document.getElementById("7").value != "" && document.getElementById("8").value == ''){
+                        document.getElementById("8").value = data[i]
+                    }
+
+                    else {
+                        document.getElementById("10").value = data[i]
+                    }
+
+                }
+
+            })
+        })
+
+        
+
+    }
+
+    function write_data(){
+
+        var dyr_name_1 = document.getElementById("1");
+        var dyrect_1 = document.getElementById("2");
+        var dyr_name_2 = document.getElementById("3");
+        var dyrect_2 = document.getElementById("4");
+        var dyr_name_3 = document.getElementById("5");
+        var dyrect_3 = document.getElementById("6");
+        var dyr_name_4 = document.getElementById("7");
+        var dyrect_4 = document.getElementById("8");
+        var dyr_name_5 = document.getElementById("9");
+        var dyrect_5 = document.getElementById("10");
+
+        var entry = {
+            dyr_name_1: dyr_name_1.value,
+            dyrect_1: dyrect_1.value,
+            dyr_name_2: dyr_name_2.value,
+            dyrect_2: dyrect_2.value,
+            dyr_name_3: dyr_name_3.value,
+            dyrect_3: dyrect_3.value,
+            dyr_name_4: dyr_name_4.value,
+            dyrect_4: dyrect_4.value,
+            dyr_name_5: dyr_name_5.value,
+            dyrect_5: dyrect_5.value,
+            flag: "0"
+        };
+
+        console.log(entry)
+        
+        fetch(`${window.origin}/upload-pdf`, {
+            method: "POST",
+            credentials: "include",
+            body: JSON.stringify(entry),
+            cache: "no-cache",
+            headers: new Headers({
+                "content-type": "application/json"
+            })
+        })
+
+    }
+
+    function delete_data(){
+
+        var dyr_name_1 = document.getElementById("1");
+        var dyrect_1 = document.getElementById("2");
+        var dyr_name_2 = document.getElementById("3");
+        var dyrect_2 = document.getElementById("4");
+        var dyr_name_3 = document.getElementById("5");
+        var dyrect_3 = document.getElementById("6");
+        var dyr_name_4 = document.getElementById("7");
+        var dyrect_4 = document.getElementById("8");
+        var dyr_name_5 = document.getElementById("9");
+        var dyrect_5 = document.getElementById("10");
+        document.getElementById("2").value = document.getElementById("4").value = 
+        document.getElementById("6").value = document.getElementById("8").value =
+        document.getElementById("10").value = '';
+
+        var entry = {
+            dyr_name_1: dyr_name_1.value,
+            dyrect_1: dyrect_1.value,
+            dyr_name_2: dyr_name_2.value,
+            dyrect_2: dyrect_2.value,
+            dyr_name_3: dyr_name_3.value,
+            dyrect_3: dyrect_3.value,
+            dyr_name_4: dyr_name_4.value,
+            dyrect_4: dyrect_4.value,
+            dyr_name_5: dyr_name_5.value,
+            dyrect_5: dyrect_5.value,
+            flag: "1"
+        };
+
+        console.log(entry)
+
+        fetch(`${window.origin}/upload-pdf`, {
+                method: "POST",
+                credentials: "include",
+                body: JSON.stringify(entry),
+                cache: "no-cache",
+                headers: new Headers({
+                    "content-type": "application/json"
+                })
+            })
+
+        };
+
+
+
+</script>
+
+{% endblock %}

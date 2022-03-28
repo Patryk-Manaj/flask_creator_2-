@@ -1,0 +1,14 @@
+body .content h1, .content h2 {
+    background-color: whitesmoke;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+#pdf::before {
+    content: "Pick file";
+    position: absolute;
+    z-index: 2;
+    display: block;
+    background-color: #eee;
+    width: 80px;
+  }
+

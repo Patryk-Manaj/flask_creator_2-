@@ -26,6 +26,8 @@ from flask_sqlalchemy import SQLAlchemy
 
 import os 
 
+# -*- coding: utg-8 -*- 
+
 @app.route("/")
 def index():
     return render_template("/public/index.html")

@@ -26,7 +26,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 import os 
 
-# -*- coding: utg-8 -*- 
+# -*- coding: utf-8 -*- 
 
 @app.route("/")
 def index():

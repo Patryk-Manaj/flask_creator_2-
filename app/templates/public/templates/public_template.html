@@ -29,29 +29,41 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/about">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/upload-pdf">Translate</a>
-                </li>
             </ul>
         </div>
 
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin/dashboard">Admin</a>
+                    <a class="nav-link" href="/admin/dashboard">Wyloguj</a>
                 </li>
             </ul>
         </div>
 
     </nav>
 
+    <div class="container">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <span>{{message}}</span>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                {% endfor %}
+            {% endif %}
+        {% endwith%}
+    </div>
+
 
     <main>
         {% block main %}{% endblock %}
     </main>
+
 
     <!-- Optional JavaScript; choose one of the two! -->
 

@@ -14,7 +14,7 @@ from jinja2 import Template
 
 from app import app 
 
-from flask import render_template, request, redirect, jsonify, make_response, json, send_from_directory
+from flask import flash, render_template, request, redirect, jsonify, make_response, json, send_from_directory, url_for, session
 
 from werkzeug.utils import secure_filename
 
@@ -26,8 +26,29 @@ from flask_sqlalchemy import SQLAlchemy
 
 import os 
 
-@app.route("/")
+# -*- coding: utf-8 -*- 
+
+@app.route("/admin/dashboard")
+def log_out():
+
+    
+
+    return redirect(url_for('index'))
+    
+@app.route("/", methods = ["GET", "POST"])
 def index():
+
+    session.pop("USERNAME", None)
+
+    if request.method == "POST":
+
+        if request.form['username'] == 'user1' and request.form['password'] == 'user':
+            session["USERNAME"] = "user1"
+            return redirect(url_for("upload_pdf"))
+        elif (request.form['username'] != '' and request.form['password'] != ''):
+            flash("Nieprawidłowe dane logowania!")
+            return(redirect.url)
+
     return render_template("/public/index.html")
 
 @app.route("/about")
@@ -39,11 +60,12 @@ def about():
         os.abort(404)
 
 
-app.config["PDF_UPLOADS"] = "/home/paro/workspace/flask_first_steps/app/app/static/pdf/uploads"
-app.config["PDF_DOWNLOADS"] = "/home/paro/workspace/flask_first_steps/app/app/static/pdf/downloads"
+app.config["PDF_UPLOADS"] = "/home/paro/workspace/flask_first_steps/app/app/app/static/pdf/uploads"
+app.config["PDF_DOWNLOADS"] = "/home/paro/workspace/flask_first_steps/app/app/app/static/pdf/downloads"
 app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["PDF"]
 app.config["SQLALCHEMY_DATABASE_URI"]='sqlite:///directive.db'
 app.config["MAX_IMAGE_FILESIZE"] = 10485760 
+app.config['SECRET_KEY'] = '000d88cd9d90036ebdd237eb6b0db000'
 
 #Initialize the database
 db = SQLAlchemy(app)
@@ -56,7 +78,7 @@ class Direcive(db.Model):
     dyrect = db.Column(db.String(200), nullable=False)
 
     def __repr__(self):
-        template = '{0.name} {0.dyrect}'
+        template = '{0.id} {0.name} {0.dyrect}'
         return template.format(self)
         
 
@@ -190,12 +212,18 @@ def upload_pdf():
                 if FormName_5 !='' and FormDyrec_5 !='':
                     db.session.add(Direcive(name = FormName_5, dyrect = FormDyrec_5))
 
-                db.session.commit()
-                    
+                db.session.commit()   
                 
     dyrectives = Direcive.query.all()
 
-    return render_template("public/upload_pdf.html", dyrectives=dyrectives)
+    if session.get("USERNAME", None) is not None:
+        return render_template("public/upload_pdf.html", dyrectives=dyrectives)
+    else:
+        print("Nieznaleziono w sesji")
+        return redirect(url_for("index"))
+
+
+    # return render_template("public/upload_pdf.html", dyrectives=dyrectives)
 
 
 def translate_declaration(filename):
@@ -209,9 +237,9 @@ def translate_declaration(filename):
 
     pdf.add_page()
 
-    pdf.add_font('Siemens', '', r'/home/paro/workspace/flask_first_steps/app/app/fonts/Dialog Bold.ttf', uni=True)
-    pdf.add_font('Open_Sans', '', r'/home/paro/workspace/flask_first_steps/app/app/fonts/OpenSans-Italic-VariableFont_wdth,wght.ttf', uni=True)
-    pdf.add_font('Robo', '',r'/home/paro/workspace/flask_first_steps/app/app/fonts/Roboto-Regular.ttf', uni=True)
+    pdf.add_font('Siemens', '', r'/home/paro/workspace/flask_first_steps/app/app/app/fonts/Dialog-Bold.ttf', uni=True)
+    pdf.add_font('Open_Sans', '', r'/home/paro/workspace/flask_first_steps/app/app/app/fonts/OpenSans-Italic-VariableFont_wdt.ttf', uni=True)
+    pdf.add_font('Robo', '',r'/home/paro/workspace/flask_first_steps/app/app/app/fonts/Roboto-Regularr.ttf', uni=True)
 
     pdf.set_font('Siemens', '', 28)
 
@@ -339,7 +367,7 @@ def translate_declaration(filename):
     merger.append(input_file)
     
 
-    merger.write("/home/paro/workspace/flask_first_steps/app/app/static/pdf/downloads/merged.pdf")
+    merger.write("/home/paro/workspace/flask_first_steps/app/app/app/static/pdf/downloads/merged.pdf")
     merger.close()
 
 

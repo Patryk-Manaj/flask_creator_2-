@@ -11,7 +11,7 @@
             <hr>
 
             <form action ="/upload-pdf" method = "POST" enctype = "multipart/form-data">
-
+                
                 
                 <div class = "form-group">
                 
@@ -26,35 +26,81 @@
                     <br>
 
                     <div class="first">
-                        <label>Numer deklaracji<input class="form-control" type="text" name="decnum" placeholder="Max. number of characters 30." style="width: 1110px;"></label>
+                        <label>Numer deklaracji<input class="form-control" type="text" name="decnum" placeholder="..." style="width: 1110px;"></label>
                         <br>
-                        <label>Opis produktu<textarea class="form-control" type="text" name="prodident" placeholder="Max. number of characters 30." style="width: 1110px;"></textarea></label>
+                        <label>Opis produktu<textarea class="form-control" type="text" name="prodident" placeholder="..." style="width: 1110px;"></textarea></label>
                         <br>
-                        <label>Producent<input class="form-control" type="text" name="manufac" placeholder="Max. number of characters 30." style="width: 1110px;"></label>
+                        <label>Producent<input class="form-control" type="text" name="manufac" placeholder="..." style="width: 1110px;"></label>
                         <br>
-                        <label>Adres<input class="form-control" type="text" name="adresss" placeholder="Max. number of characters 30." style="width: 1110px;"></label>
+                        <label>Adres<input class="form-control" type="text" name="adresss" placeholder="..." style="width: 1110px;"></label>
                     </div>
                     <br>
                     <br>
                     Dyrektywy
-                    <br>
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Numer dyrektywy" name="directive_number_1" id="1" style="width: auto;">
-                        <input type="text" class="form-control input-sm" placeholder="Dyrektywa" name="directive_1" id="2" style="width: 800px;">
-                        <input type="text" class="form-control" placeholder="Numer dyrektywy" name="directive_number_2" id="3" style="width: auto;">
-                        <input type="text" class="form-control input-sm" placeholder="Dyrektywa" name="directive_2" id="4" style="width: 800px;">
-                        <input type="text" class="form-control" placeholder="Numer dyrektywy" name="directive_number_3" id="5" style="width: auto;">
-                        <input type="text" class="form-control input-sm" placeholder="Dyrektywa" name="directive_3" id="6" style="width: 800px;">
-                        <input type="text" class="form-control" placeholder="Numer dyrektywy" name="directive_number_4" id="7" style="width: auto;">
-                        <input type="text" class="form-control input-sm" placeholder="Dyrektywa" name="directive_4" id="8" style="width: 800px;">
-                        <input type="text" class="form-control" placeholder="Numer dyrektywy" name="directive_number_5" id="9" style="width: auto;">
-                        <input type="text" class="form-control input-sm" placeholder="Dyrektywa" name="directive_5" id="10" style="width: 800px;">
+
+                    <div class="dyrektywy">
+                        <!-- <form class="row g-3"> -->
+                                    
+                            <input class="form-control" list="datalistOptions" id="1" name="directive_number_1" placeholder="Numer dyrektywy" style="width: 20%; float: left;">
+                                <datalist id="datalistOptions">
+                                    {% for dyrective in dyrectives %}
+                                        <option value="{{dyrective.name}}">
+                                    {%endfor%}
+                                </datalist>
+                            
+                            <textarea class="form-control" name="directive_1" id="2" rows="2" placeholder="Przetłumaczona treść dyrektywy" style="float: left; width: 80%;"></textarea>
+                            
+
+                            <input class="form-control" list="datalistOptions" id="3" name="directive_number_2" placeholder="Numer dyrektywy" style="width: 20%; float: left;">
+                                <datalist id="datalistOptions">
+                                    {% for dyrective in dyrectives %}
+                                        <option value="{{dyrective.name}}">
+                                    {%endfor%}
+                                </datalist>
+                            
+                            <textarea class="form-control" name="directive_2" id="4" rows="2" placeholder="Przetłumaczona treść dyrektywy" style="float: left; width: 80%;"></textarea>
+
+
+                            <input class="form-control" list="datalistOptions" id="5" name="directive_number_3" placeholder="Numer dyrektywy" style="width: 20%; float: left;">
+                                <datalist id="datalistOptions">
+                                    {% for dyrective in dyrectives %}
+                                        <option value="{{dyrective.name}}">
+                                    {%endfor%}
+                                </datalist>
+                            
+                            <textarea class="form-control" name="directive_3" id="6" rows="2" placeholder="Przetłumaczona treść dyrektywy" style="float: left; width: 80%;"></textarea>
+
+
+                            <input class="form-control" list="datalistOptions" id="7" name="directive_number_4" placeholder="Numer dyrektywy" style="width: 20%; float: left;">
+                                <datalist id="datalistOptions">
+                                    {% for dyrective in dyrectives %}
+                                        <option value="{{dyrective.name}}">
+                                    {%endfor%}
+                                </datalist>
+                            
+                            <textarea class="form-control" name="directive_4" id="8" rows="2" placeholder="Przetłumaczona treść dyrektywy" style="float: left; width: 80%;"></textarea>
+
+
+                            <input class="form-control" list="datalistOptions" id="9" name="directive_number_5" placeholder="Numer dyrektywy" style="width: 20%; float: left;">
+                                <datalist id="datalistOptions">
+                                    {% for dyrective in dyrectives %}
+                                        <option value="{{dyrective.name}}">
+                                    {%endfor%}
+                                </datalist>
+                            
+                            <textarea class="form-control" name="directive_5" id="10" rows="2" placeholder="Przetłumaczona treść dyrektywy" style="float: left; width: 80%;"></textarea>
+                            
+
+
+                        <!-- </form> -->
                     </div>
+                    
+                    <br>
 
                     <button class="btn btn-primary updateButton" type="button" onclick="delete_data(); window.location.reload();" style="float: right; margin-left: 5px;
-                    margin-top: 10px;">Usuń</button>
+                    margin-top: 10px;">Usuń z bazy</button>
 
-                    <button class="btn btn-primary updateButton" type="button" onclick="write_data(); window.location.reload();" style="float: right; margin-top: 10px;">Zapisz</button>
+                    <button class="btn btn-primary updateButton" type="button" onclick="write_data(); window.location.reload();" style="float: right; margin-top: 10px;">Zapisz do bazy</button>
                     <button class="btn btn-primary updateButton" type="button" onclick="submit_entry();" style="margin-top: 10px;">Wczytaj</button>
                     
                     <button class="btn btn-primary updateButton" type="button" 
@@ -70,6 +116,9 @@
                                 document.getElementById('10').value = ''" style="margin-top: 10px;">Wyczyść</button>
                         
                 </div>
+
+                 
+
                 
                 <br>
                 <br>
@@ -151,6 +200,8 @@
 
                 </div>
 
+                <button type = "submit" class = "btn btn-primary"> Upload .pdf</button>
+
 
             
                         
@@ -160,7 +211,7 @@
                 
 
                 
-                <button type = "submit" class = "btn btn-primary"> Upload .pdf</button> 
+            
 
 
                 
@@ -169,6 +220,8 @@
             
 
             <br>
+
+
 
             <br/>
 

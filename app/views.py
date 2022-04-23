@@ -393,7 +393,7 @@ def translate_declaration(filename):
     merger.write("/home/paro/workspace/flask_first_steps/app/app/app/static/pdf/downloads/merged.pdf")
     merger.close()
 
-    rm_path = "/home/paro/workspace/flask_first_steps/app/app/app/static/pdf/uploads/" + filename
+    rm_path = "/home/paro/workspace/flask_first_steps/app/app/app/static/pdf/uploads" + filename
 
     os.remove(rm_path)
 

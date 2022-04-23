@@ -260,7 +260,7 @@ def translate_declaration(filename):
 
     pdf.add_page()
 
-    pdf.add_font('Siemens', '', r'/home/manajpatryk/app/app/fonts/Dialog-Bold.ttf', uni=True)
+    pdf.add_font('Siemens', '', r'/home/manajpatryk/app/app/fonts/Dialog-Boldd.ttf', uni=True)
     pdf.add_font('Open_Sans', '', r'/home/manajpatryk/app/app/fonts/OpenSans-Italic-VariableFont_wdth.ttf', uni=True)
     pdf.add_font('Robo', '',r'/home/manajpatryk/app/app/fonts/Roboto-Regularr.ttf', uni=True)
 

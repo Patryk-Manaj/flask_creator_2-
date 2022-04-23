@@ -42,12 +42,12 @@ def index():
 
     if request.method == "POST":
 
-        if request.form['username'] == 'user1' and request.form['password'] == 'user':
+        if request.form['password'] == 'user1':
             session["USERNAME"] = "user1"
             return redirect(url_for("upload_pdf"))
-        elif (request.form['username'] != '' and request.form['password'] != ''):
+        elif (request.form['password'] != ''):
             flash("Nieprawidłowe dane logowania!")
-            return(redirect.url)
+        
 
     return render_template("/public/index.html")
 
@@ -66,6 +66,7 @@ app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["PDF"]
 app.config["SQLALCHEMY_DATABASE_URI"]='sqlite:///directive.db'
 app.config["MAX_IMAGE_FILESIZE"] = 10485760 
 app.config['SECRET_KEY'] = '000d88cd9d90036ebdd237eb6b0db000'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False 
 
 #Initialize the database
 db = SQLAlchemy(app)
@@ -110,16 +111,19 @@ def upload_pdf():
         if request.files:
 
             if not allowed_pdf_filesize(request.cookies.get("filesize")):
+                flash("Plik jest za duży!")
                 print("File exceeded maximum size")
                 return redirect(request.url)
             
             pdf = request.files["pdf"]
 
             if pdf.filename == "":
+                flash("Nie wybrano pliku!")
                 print(".pdf must have a filename")
                 return redirect(request.url)
 
             if not allowed_pdf(pdf.filename):
+                flash("Niedozwolone rozszerzenie pliku!")
                 print("Than extension is not allowed")
                 return redirect(request.url)
 
@@ -196,23 +200,42 @@ def upload_pdf():
                     return res
                 
             elif (FormName_1 !='' and FormDyrec_1 !='') or (FormName_2 !='' and FormDyrec_2 !='') or (FormName_3 !='' and FormDyrec_3 !='') or (FormName_4 !='' and FormDyrec_4 !='') or (FormName_5 !='' and FormDyrec_5 !=''):
-
+                
                 if FormName_1 !='' and FormDyrec_1 !='': 
+                    if Direcive.query.filter_by(name=FormName_1) != '':
+                        Direcive.query.filter_by(name=FormName_1).delete() 
+                        db.session.commit()
                     db.session.add(Direcive(name = FormName_1, dyrect = FormDyrec_1))
 
                 if FormName_2 !='' and FormDyrec_2 !='':
+                    if Direcive.query.filter_by(name=FormName_2) != '':
+                        Direcive.query.filter_by(name=FormName_2).delete() 
+                        db.session.commit()
                     db.session.add(Direcive(name = FormName_2, dyrect = FormDyrec_2))
 
                 if FormName_3 !='' and FormDyrec_3 !='':
+                    if Direcive.query.filter_by(name=FormName_3) != '':
+                        Direcive.query.filter_by(name=FormName_3).delete() 
+                        db.session.commit()
                     db.session.add(Direcive(name = FormName_3, dyrect = FormDyrec_3))
 
                 if FormName_4 !='' and FormDyrec_4 !='':
+                    if Direcive.query.filter_by(name=FormName_4) != '':
+                        Direcive.query.filter_by(name=FormName_4).delete() 
+                        db.session.commit()
                     db.session.add(Direcive(name = FormName_4, dyrect = FormDyrec_4))
-
+                    
                 if FormName_5 !='' and FormDyrec_5 !='':
+                    if Direcive.query.filter_by(name=FormName_5) != '':
+                        Direcive.query.filter_by(name=FormName_5).delete() 
+                        db.session.commit()
                     db.session.add(Direcive(name = FormName_5, dyrect = FormDyrec_5))
 
-                db.session.commit()   
+                db.session.commit() 
+
+
+                # else: 
+                #     flash("Sprawdź czy podanego numemru dyrektywy nie ma już w bazie. Jeśli próbujesz napisać istniejącą dyrektywę, to najpierw musisz usunąć starą!")
                 
     dyrectives = Direcive.query.all()
 
@@ -370,22 +393,7 @@ def translate_declaration(filename):
     merger.write("/home/paro/workspace/flask_first_steps/app/app/app/static/pdf/downloads/merged.pdf")
     merger.close()
 
+    rm_path = "/home/paro/workspace/flask_first_steps/app/app/app/static/pdf/uploads/" + filename
 
-def create_entry():
-        
-
-            req = request.get_json()
-        # # # print(req["dyr_name"], req["dyrect"])
-
-        # # # db.create_all()
-            FormName = req["dyr_name"]
-            FormDyrec = req["dyrect"]
-        # print(FormName, FormDyrec)
-            print('func', req)
-
-            res = make_response(jsonify({"message": "some text"}), 200)
-
-            return res
-            
-
+    os.remove(rm_path)
 

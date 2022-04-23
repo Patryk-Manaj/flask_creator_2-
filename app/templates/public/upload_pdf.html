@@ -26,13 +26,13 @@
                     <br>
 
                     <div class="first">
-                        <label>Numer deklaracji<input class="form-control" type="text" name="decnum" placeholder="..." style="width: 1110px;"></label>
+                        <label>Numer deklaracji<input class="form-control" type="text" name="decnum" style="width: 1110px;"></label>
                         <br>
-                        <label>Opis produktu<textarea class="form-control" type="text" name="prodident" placeholder="..." style="width: 1110px;"></textarea></label>
+                        <label>Opis produktu<textarea class="form-control" type="text" name="prodident" style="width: 1110px;"></textarea></label>
                         <br>
-                        <label>Producent<input class="form-control" type="text" name="manufac" placeholder="..." style="width: 1110px;"></label>
+                        <label>Producent<input class="form-control" type="text" name="manufac"  style="width: 1110px;"></label>
                         <br>
-                        <label>Adres<input class="form-control" type="text" name="adresss" placeholder="..." style="width: 1110px;"></label>
+                        <label>Adres<input class="form-control" type="text" name="adresss" style="width: 1110px;"></label>
                     </div>
                     <br>
                     <br>
@@ -201,35 +201,29 @@
                 </div>
 
                 <button type = "submit" class = "btn btn-primary"> Upload .pdf</button>
-
-
-            
-                        
-                
-                
-
-                
-
-                
-            
-
-
                 
             </form>
 
-            
-
             <br>
-
-
 
             <br/>
 
-            {% for dyrective in dyrectives %}
-            
-                {{dyrective.name}} - {{dyrective.dyrect}} <br/> 
 
-            {%endfor%}
+            <table class="table">
+                <thead>
+                    <th scope="col" style="width: 15%;">Numer dyrektywy</th>
+                    <th scope="col">Przetłumamczona treść dyrektywy</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for dyrective in dyrectives %} 
+                        <tr>
+                            <th scope="row">{{dyrective.name}}</th>
+                            <td>{{dyrective.dyrect}}</td>
+                        </tr>
+                    {%endfor%}
+                </tbody>
+              </table>
             
             <br>
             <br>

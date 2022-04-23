@@ -60,8 +60,8 @@ def about():
         os.abort(404)
 
 
-app.config["PDF_UPLOADS"] = "/home/paro/workspace/flask_first_steps/app/app/app/static/pdf/uploads"
-app.config["PDF_DOWNLOADS"] = "/home/paro/workspace/flask_first_steps/app/app/app/static/pdf/downloads"
+app.config["PDF_UPLOADS"] = "/home/manajpatryk/app/app/static/pdf/uploads"
+app.config["PDF_DOWNLOADS"] = "/home/manajpatryk/app/app/static/pdf/downloads"
 app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["PDF"]
 app.config["SQLALCHEMY_DATABASE_URI"]='sqlite:///directive.db'
 app.config["MAX_IMAGE_FILESIZE"] = 10485760 
@@ -260,9 +260,9 @@ def translate_declaration(filename):
 
     pdf.add_page()
 
-    pdf.add_font('Siemens', '', r'/home/paro/workspace/flask_first_steps/app/app/app/fonts/Dialog-Bold.ttf', uni=True)
-    pdf.add_font('Open_Sans', '', r'/home/paro/workspace/flask_first_steps/app/app/app/fonts/OpenSans-Italic-VariableFont_wdt.ttf', uni=True)
-    pdf.add_font('Robo', '',r'/home/paro/workspace/flask_first_steps/app/app/app/fonts/Roboto-Regularr.ttf', uni=True)
+    pdf.add_font('Siemens', '', r'/home/manajpatryk/app/app/fonts/Dialog-Bold.ttf', uni=True)
+    pdf.add_font('Open_Sans', '', r'/home/manajpatryk/app/app/fonts/OpenSans-Italic-VariableFont_wdt.ttf', uni=True)
+    pdf.add_font('Robo', '',r'/home/manajpatryk/app/app/fonts/Roboto-Regularr.ttf', uni=True)
 
     pdf.set_font('Siemens', '', 28)
 
@@ -390,10 +390,10 @@ def translate_declaration(filename):
     merger.append(input_file)
     
 
-    merger.write("/home/paro/workspace/flask_first_steps/app/app/app/static/pdf/downloads/merged.pdf")
+    merger.write("/home/manajpatryk/app/app/static/pdf/downloads/merged.pdf")
     merger.close()
 
-    rm_path = "/home/paro/workspace/flask_first_steps/app/app/app/static/pdf/uploads" + filename
+    rm_path = "/home/manajpatryk/app/app/static/pdf/uploads" + filename
 
     os.remove(rm_path)
 

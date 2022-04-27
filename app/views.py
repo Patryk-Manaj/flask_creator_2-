@@ -136,10 +136,14 @@ def upload_pdf():
             translate_declaration(pdf.filename)
 
 
-            try:
-                return send_from_directory(app.config["PDF_DOWNLOADS"], "merged.pdf", as_attachment=True)
-            except FileNotFoundError:
-                os.abort(404)
+            if request.form['file_name'] =='':
+                flash('Podaj nazwę pliku!')
+            else:
+                try:
+                    file_name = request.form['file_name'] + ".pdf"
+                    return send_from_directory(app.config["PDF_DOWNLOADS"], file_name, as_attachment=True)
+                except FileNotFoundError:
+                    os.abort(404)
             # return redirect(request.url)
         
         else:
@@ -390,7 +394,7 @@ def translate_declaration(filename):
     merger.append(input_file)
     
 
-    merger.write("/home/manajpatryk/app/app/static/pdf/downloads/merged.pdf")
+    merger.write("/home/manajpatryk/app/app/static/pdf/downloads/ + file_name + ".pdf")
     merger.close()
 
     rm_path = "/home/manajpatryk/app/app/static/pdf/uploads/" + filename

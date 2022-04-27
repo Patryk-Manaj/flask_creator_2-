@@ -393,7 +393,7 @@ def translate_declaration(filename):
     merger.append(open('pdf_1.pdf', 'rb'))
     merger.append(input_file)
     
-
+    file_name = request.form['file_name']
     merger.write("/home/manajpatryk/app/app/static/pdf/downloads/ + file_name + ".pdf")
     merger.close()
 

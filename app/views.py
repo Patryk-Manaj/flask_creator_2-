@@ -145,8 +145,8 @@ def upload_pdf():
                 except FileNotFoundError:
                     os.abort(404)
             # return redirect(request.url)
-            rm_path_down = "/home/pama/app/app/static/pdf/downloads/" + file_name
-            os.remove(rm_path_down)
+                rm_path_down = "/home/pama/app/app/static/pdf/downloads/" + file_name
+                os.remove(rm_path_down)
         else:
 
             req = request.get_json()

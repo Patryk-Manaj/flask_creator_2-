@@ -397,7 +397,8 @@ def translate_declaration(filename):
     merger.write("/home/pama/app/app/static/pdf/downloads/" + file_name + ".pdf")
     merger.close()
 
-    rm_path = "/home/pama/app/app/static/pdf/uploads/" + filename
+    rm_path_up = "/home/pama/app/app/static/pdf/uploads/" + filename
+    rm_path_down = "/home/pama/app/app/static/pdf/uploads/" + file_name + ".pdf"
 
-    os.remove(rm_path)
-
+    os.remove(rm_path_up)
+    os.remove(rm_path_down)

@@ -4,6 +4,7 @@ from enum import unique
 from fileinput import filename
 from pipes import Template
 from re import T
+import time
 from signal import pause
 import string
 from unicodedata import name
@@ -142,6 +143,7 @@ def upload_pdf():
                 try:
                     file_name = request.form['file_name'] + ".pdf"
                     send_from_directory(app.config["PDF_DOWNLOADS"], file_name, as_attachment=True)
+                    time.sleep(3)
                     rm_path_down = "/home/pama/app/app/static/pdf/downloads/" + file_name
                     os.remove(rm_path_down)
                 except FileNotFoundError:

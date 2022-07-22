@@ -110,6 +110,10 @@ def upload_pdf():
     if request.method == "POST":
 
         if request.files:
+            
+            if not os.listdir("/home/pama/app/app/static/pdf/downloads/") == ""
+                rm_path_down = "/home/pama/app/app/static/pdf/downloads/" + os.listdir
+                os.remove(rm_path_down)
 
             if not allowed_pdf_filesize(request.cookies.get("filesize")):
                 flash("Plik jest za duży!")
@@ -142,10 +146,7 @@ def upload_pdf():
             else:
                 try:
                     file_name = request.form['file_name'] + ".pdf"
-                    send_from_directory(app.config["PDF_DOWNLOADS"], file_name, as_attachment=True)
-                    time.sleep(3)
-                    rm_path_down = "/home/pama/app/app/static/pdf/downloads/" + file_name
-                    os.remove(rm_path_down)
+                    return send_from_directory(app.config["PDF_DOWNLOADS"], file_name, as_attachment=True)
                 except FileNotFoundError:
                     os.abort(404)
             # return redirect(request.url)

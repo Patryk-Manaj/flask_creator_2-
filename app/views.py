@@ -397,7 +397,7 @@ def translate_declaration(filename):
     merger.write("/home/manajpatryk/app/app/static/pdf/downloads/" + file_name + ".pdf")
     merger.close()
 
-    rm_path = "/home/manajpatryk/app/app/static/pdf/uploads/" + filename
+    #rm_path = "/home/manajpatryk/app/app/static/pdf/uploads/" + filename
 
     os.remove(rm_path)
 

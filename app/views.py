@@ -60,8 +60,8 @@ def about():
         os.abort(404)
 
 
-app.config["PDF_UPLOADS"] = "/home/manajpatryk/app/app/static/pdf/uploads"
-app.config["PDF_DOWNLOADS"] = "/home/manajpatryk/app/app/static/pdf/downloads"
+app.config["PDF_UPLOADS"] = "/home/pama/app/app/static/pdf/uploads"
+app.config["PDF_DOWNLOADS"] = "/home/pama/app/app/static/pdf/downloads"
 app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["PDF"]
 app.config["SQLALCHEMY_DATABASE_URI"]='sqlite:///directive.db'
 app.config["MAX_IMAGE_FILESIZE"] = 10485760 
@@ -264,9 +264,9 @@ def translate_declaration(filename):
 
     pdf.add_page()
 
-    pdf.add_font('Siemens', '', r'/home/manajpatryk/app/app/fonts/Dialog-Boldd.ttf', uni=True)
-    pdf.add_font('Open_Sans', '', r'/home/manajpatryk/app/app/fonts/OpenSans-Italic-VariableFont_wdth.ttf', uni=True)
-    pdf.add_font('Robo', '',r'/home/manajpatryk/app/app/fonts/Roboto-Regularrr.ttf', uni=True)
+    pdf.add_font('Siemens', '', r'/home/pama/app/app/fonts/Dialog-Boldd.ttf', uni=True)
+    pdf.add_font('Open_Sans', '', r'/home/pama/app/app/fonts/OpenSans-Italic-VariableFont_wdth.ttf', uni=True)
+    pdf.add_font('Robo', '',r'/home/pama/app/app/fonts/Roboto-Regularrr.ttf', uni=True)
 
     pdf.set_font('Siemens', '', 28)
 
@@ -394,10 +394,10 @@ def translate_declaration(filename):
     merger.append(input_file)
     
     file_name = request.form['file_name']
-    merger.write("/home/manajpatryk/app/app/static/pdf/downloads/" + file_name + ".pdf")
+    merger.write("/home/pama/app/app/static/pdf/downloads/" + file_name + ".pdf")
     merger.close()
 
-    #rm_path = "/home/manajpatryk/app/app/static/pdf/uploads/" + filename
+    rm_path = "/home/pama/app/app/static/pdf/uploads/" + filename
 
     os.remove(rm_path)
 

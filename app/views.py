@@ -141,13 +141,13 @@ def upload_pdf():
             else:
                 try:
                     file_name = request.form['file_name'] + ".pdf"
-                    return send_from_directory(app.config["PDF_DOWNLOADS"], file_name, as_attachment=True)
+                    send_from_directory(app.config["PDF_DOWNLOADS"], file_name, as_attachment=True)
+                    rm_path_down = "/home/pama/app/app/static/pdf/downloads/" + file_name
+                    return os.remove(rm_path_down)
                 except FileNotFoundError:
                     os.abort(404)
             # return redirect(request.url)
-                rm_path_down = "/home/pama/app/app/static/pdf/downloads/" + file_name
-                os.remove(rm_path_down)
-        
+
         else:
 
             req = request.get_json()

@@ -111,7 +111,7 @@ def upload_pdf():
 
         if request.files:
             
-            if os.listdir("/home/pama/app/app/static/pdf/downloads/") != ""
+            if os.listdir("/home/pama/app/app/static/pdf/downloads") != ""
                 rm_path_down = "/home/pama/app/app/static/pdf/downloads/" + os.listdir
                 os.remove(rm_path_down)
 

@@ -112,8 +112,10 @@ def upload_pdf():
         if request.files:
             
             del_elem = os.listdir("/home/pama/app/app/static/pdf/downloads")
-            rm_path_down = "/home/pama/app/app/static/pdf/downloads/" + del_elem[0]
-            os.remove(rm_path_down)
+            
+            if not del_elem:
+                rm_path_down = "/home/pama/app/app/static/pdf/downloads/" + del_elem[0]
+                os.remove(rm_path_down)
 
             if not allowed_pdf_filesize(request.cookies.get("filesize")):
                 flash("Plik jest za duży!")

@@ -113,7 +113,7 @@ def upload_pdf():
             
             del_elem = os.listdir("/home/pama/app/app/static/pdf/downloads")
             
-            if not del_elem:
+            if del_elem:
                 rm_path_down = "/home/pama/app/app/static/pdf/downloads/" + del_elem[0]
                 os.remove(rm_path_down)
 

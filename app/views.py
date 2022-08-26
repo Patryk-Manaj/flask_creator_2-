@@ -43,7 +43,7 @@ def index():
 
     if request.method == "POST":
 
-        if request.form['password'] == 'user1':
+        if request.form['password'] == 'Siem_22_SIEP!':
             session["USERNAME"] = "user1"
             return redirect(url_for("upload_pdf"))
         elif (request.form['password'] != ''):
